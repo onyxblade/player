@@ -2,7 +2,7 @@ import Radium from 'radium'
 import React from 'react'
 import ControlPanel from './control_panel'
 import SongList from './song_list'
-
+import Zipper from '../zipper'
 
 @Radium
 class Player extends React.Component {
@@ -11,15 +11,33 @@ class Player extends React.Component {
 		color: '#fff'
 	}
 
+	state = {
+		currentPlaying: this.props.songs[0],
+		songs: new Zipper(this.props.songs)
+	}
+
+	nextSong(){
+		this.setState({songs: this.state.songs.next(), currentPlaying: this.state.songs.current})
+	}
+
+	prevSong(){
+		this.setState({songs: this.state.songs.prev(), currentPlaying: this.state.songs.current})
+	}
+
+	pause(){
+		
+	}
+
 	render(){
 		return <div style={this.style}>
-			<ControlPanel currentPlaying={{
-				cover: "http://p3.music.126.net/b5P2i1-Zzg2bCJpEMQwkoQ==/2412328511400856.jpg?param=130y130",
-				title: "ミラクル・ガール",
-				artist: "Rasmus Faber",
-				album: "ラスマス・フェイバー・プレゼンツ・プラチナ・ジャズ ～アニメ・スタンダード Vol.4～"
-			}} />
-			<SongList />
+			<ControlPanel currentPlaying={this.state.currentPlaying}
+				functions={{
+					nextSong: this.nextSong.bind(this),
+					prevSong: this.prevSong.bind(this),
+					pause: this.pause.bind(this)
+				}} />
+			<SongList songs={this.state.songs} 
+				currentPlaying={this.state.currentPlaying} />
 		</div>;
 	}
 }

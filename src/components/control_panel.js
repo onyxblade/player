@@ -70,9 +70,15 @@ class ControlPanel extends React.Component {
 				bottom: '20px'
 			}} className="control">
 				<div style={{float: 'left'}}>
-					<button key="rewind" style={[this.buttonStyle, {backgroundImage: 'url(img/rewind.png)'}]}></button>
-					<button key="pause" style={[this.buttonStyle, {backgroundImage: 'url(img/pause.png)'}]}></button>
-					<button key="fastforward" style={[this.buttonStyle, {backgroundImage: 'url(img/fastforward.png)'}]}></button>
+					<button key="rewind"
+						style={[this.buttonStyle, {backgroundImage: 'url(img/rewind.png)'}]}
+						onClick={this.props.functions.prevSong} ></button>
+					<button key="pause"
+						style={[this.buttonStyle, {backgroundImage: 'url(img/pause.png)'}]}
+						onClick={this.props.functions.pause} ></button>
+					<button key="fastforward"
+						style={[this.buttonStyle, {backgroundImage: 'url(img/fastforward.png)'}]}
+						onClick={this.props.functions.nextSong}	></button>
 				</div>
 				<div style={{float: 'right'}}>
 					<button key="mute" style={[this.buttonStyle, {backgroundImage: 'url(img/volume.png)', float: 'left'}]}></button>
