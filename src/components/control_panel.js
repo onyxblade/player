@@ -34,6 +34,16 @@ class ControlPanel extends React.Component {
 	calcPercent(a, b){
 		return `${(a / b) * 100}%`
 	}
+	getLoopIconStyle(){
+		var defaults = {backgroundImage: 'url(img/repeat.png)', float: 'right', position: 'relative'}
+		if(this.props.loopMode == 'list'){
+			return [this.buttonStyle, defaults, {opacity: 1}]
+		} else if(this.props.loopMode == 'single'){
+			return [this.buttonStyle, defaults, {opacity: 1}]
+		} else if(this.props.loopMode == 'none'){
+			return [this.buttonStyle, defaults]
+		}
+	}
 	render() {
 		return <div style={{
 			width: '500px',
@@ -43,7 +53,7 @@ class ControlPanel extends React.Component {
 			position: 'relative',
 			textShadow: '0 1px 2px #000'
 		}} className="control-panel">
-			<img src={this.props.currentPlaying.cover}
+			<img src={this.props.currentSong.cover}
 				style={{
 					borderRadius: '10px',
 					width: '130px',
@@ -60,17 +70,17 @@ class ControlPanel extends React.Component {
 				<h3 style={[{
 					fontSize: '14px',
 					margin: '0px'
-				}, this.lineStyle]}>{this.props.currentPlaying.title}</h3>
+				}, this.lineStyle]}>{this.props.currentSong.title}</h3>
 				<p style={[{
 					fontSize: '12px',
 					color: '#ccc',
 					margin: '5px 0 0 0'
-				}, this.lineStyle]}>{this.props.currentPlaying.artist}</p>
+				}, this.lineStyle]}>{this.props.currentSong.artist}</p>
 				<p style={[{
 					fontSize: '12px',
 					color: '#ccc',
 					margin:'5px 0 0 0'
-				}, this.lineStyle]}>{this.props.currentPlaying.album}</p>
+				}, this.lineStyle]}>{this.props.currentSong.album}</p>
 			</div>
 			<div style={{
 				position: 'absolute',
@@ -81,13 +91,13 @@ class ControlPanel extends React.Component {
 				<div style={{float: 'left'}}>
 					<button key="rewind"
 						style={[this.buttonStyle, {backgroundImage: 'url(img/rewind.png)'}]}
-						onClick={this.props.functions.prevSong} ></button>
+						onClick={this.props.functions.handlePrevSong} ></button>
 					<button key="pause"
-						style={[this.buttonStyle, {backgroundImage: (this.props.isPlaying ? 'url(img/pause.png)' : 'url(img/play.png)')}]}
-						onClick={this.props.functions.pause} ></button>
+						style={[this.buttonStyle, {backgroundImage: (this.props.isPaused ? 'url(img/play.png)' : 'url(img/pause.png)')}]}
+						onClick={this.props.functions.handlePause} ></button>
 					<button key="fastforward"
 						style={[this.buttonStyle, {backgroundImage: 'url(img/fastforward.png)'}]}
-						onClick={this.props.functions.nextSong}	></button>
+						onClick={this.props.functions.handleNextSong} ></button>
 				</div>
 				<div style={{float: 'right'}}>
 					<button key="mute"
@@ -95,12 +105,12 @@ class ControlPanel extends React.Component {
 						onClick={this.props.functions.mute}></button>
 					<div style={{float: 'left', width: '100px'}}>
 						<Slider width={`${this.props.volume * 100}%`}
-								handleSlide={this.props.handleVolumeSlide} />
+								handleSlide={this.props.functions.handleVolumeSlide} />
 					</div>
 				</div>
 				<div style={{float: 'left', width: '100%'}}>
 					<Slider width={this.calcPercent(this.props.currentTime, this.props.duration)}
-							handleSlide={this.props.handleProgressSlide} />
+							handleSlide={this.props.functions.handleProgressSlide} />
 				</div>
 				<div style={{float: 'left', width: '100%'}}>
 					<div style={{
@@ -109,7 +119,16 @@ class ControlPanel extends React.Component {
 						color: '#ccc',
 						marginTop: '8px'
 					}}>{this.formatTime(this.props.currentTime)}</div>
-					<button key="repeat" style={[this.buttonStyle, {backgroundImage: 'url(img/repeat.png)', float: 'right'}]}></button>
+					<button key="repeat" style={this.getLoopIconStyle()} onClick={this.props.functions.handleLoopModeChange}>
+						<span style={{
+							position: 'absolute',
+							top: '3px',
+							right: '-2px',
+							fontSize: '8px',
+							display: (this.props.loopMode == 'single' ? 'block' : 'none'),
+							color: '#fff'
+						}}>1</span>
+					</button>
 				</div>
 			</div>
 		</div>;

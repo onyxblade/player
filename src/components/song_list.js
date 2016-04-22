@@ -4,23 +4,39 @@ import Radium from 'radium'
 @Radium
 class SongList extends React.Component {
 	isItemPlaying(item){
-		return this.props.currentPlaying == item
+		return this.props.currentSong == item
+	}
+
+	selectSongHandler(song){
+		return function(){
+			this.props.handleSelectSong(song)
+		}
 	}
 
 	renderListItem(item){
-		return <li style={[{
-			textOverflow: 'ellipsis',
-			transition: '0.3s',
-			fontSize: '12px',
-			lineHeight: '2',
-			paddingLeft: '25px',
-			cursor: 'pointer'
-		}, (this.isItemPlaying(item) ? {
-			background: 'url(./img/playing.png) no-repeat 0 center',
-			fontWeight: 'bold'
-		} : {})]} key={item.title}>
-			{item.artist} - {item.title}
-		</li>;
+		return (<li 
+			style={[{
+					textOverflow: 'ellipsis',
+					transition: '0.3s',
+					fontSize: '12px',
+					lineHeight: '2',
+					paddingLeft: '25px',
+					cursor: 'pointer',
+					color: '#aaa',
+					whiteSpace: 'nowrap',
+					':hover': {
+						color: '#fff'
+					}
+				}, (this.isItemPlaying(item) ? {
+					background: 'url(./img/playing.png) no-repeat 0 center',
+					fontWeight: 'bold',
+					color: '#fff'
+				} : {})]}
+			key={item.title}
+			onClick={this.selectSongHandler(item).bind(this)}
+		>
+				{item.artist} - {item.title}
+		</li>);
 	}
 	render() {
 		return <div style={{

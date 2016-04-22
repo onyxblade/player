@@ -1,7 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import Player from './components/player'
-import Zipper from './zipper'
 
 ReactDOM.render(<Player songs={[
 	{
