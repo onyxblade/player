@@ -24,8 +24,17 @@ class Slider extends React.Component {
 			if(width > 1) width = 1;
 			if(width < 0) width = 0;
 			this.setState({width: `${width * 100}%`})
+			this.props.handleSlide(width * 100)
 		}
 		e.preventDefault()
+	}
+	mouseClick(e){
+		var barRect = this.refs.bar.getClientRects()[0]
+		var width = (e.clientX - barRect.left) / (barRect.right - barRect.left)
+		if(width > 1) width = 1;
+		if(width < 0) width = 0;
+		this.setState({width: `${width * 100}%`})
+		this.props.handleSlide(width * 100)
 	}
 	state = {
 		hovering: false,
@@ -33,6 +42,9 @@ class Slider extends React.Component {
 		width: this.props.width
 	}
 	documentEventListener = [this.mouseUp.bind(this), this.mouseMove.bind(this)]
+	componentWillReceiveProps({width}){
+		this.setState({width})
+	}
 	render() {
 		return <div style={{
 			float: 'left',
@@ -48,6 +60,7 @@ class Slider extends React.Component {
 			onMouseLeave={this.mouseLeave.bind(this)}
 			onMouseDown={this.mouseDown.bind(this)}
 			onMouseUp={this.mouseUp.bind(this)}
+			onClick={this.mouseClick.bind(this)}
 			ref="bar">
 			<div style={{
 				position: 'absolute',

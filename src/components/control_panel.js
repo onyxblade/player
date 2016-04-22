@@ -25,6 +25,15 @@ class ControlPanel extends React.Component {
 			opacity: '1'
 		}
 	}
+	formatTime(time){
+		var min = Math.floor(time / 60).toString()
+		var sec = Math.floor(time % 60).toString()
+		if(sec.length == 1) sec = '0' + sec
+		return `${min}:${sec}`
+	}
+	calcPercent(a, b){
+		return `${(a / b) * 100}%`
+	}
 	render() {
 		return <div style={{
 			width: '500px',
@@ -74,20 +83,24 @@ class ControlPanel extends React.Component {
 						style={[this.buttonStyle, {backgroundImage: 'url(img/rewind.png)'}]}
 						onClick={this.props.functions.prevSong} ></button>
 					<button key="pause"
-						style={[this.buttonStyle, {backgroundImage: 'url(img/pause.png)'}]}
+						style={[this.buttonStyle, {backgroundImage: (this.props.isPlaying ? 'url(img/pause.png)' : 'url(img/play.png)')}]}
 						onClick={this.props.functions.pause} ></button>
 					<button key="fastforward"
 						style={[this.buttonStyle, {backgroundImage: 'url(img/fastforward.png)'}]}
 						onClick={this.props.functions.nextSong}	></button>
 				</div>
 				<div style={{float: 'right'}}>
-					<button key="mute" style={[this.buttonStyle, {backgroundImage: 'url(img/volume.png)', float: 'left'}]}></button>
+					<button key="mute"
+						style={[this.buttonStyle, {backgroundImage: (this.props.isMuted ? 'url(img/mute.png)' : 'url(img/volume.png)'), float: 'left'}]}
+						onClick={this.props.functions.mute}></button>
 					<div style={{float: 'left', width: '100px'}}>
-						<Slider width="50%" />
+						<Slider width={`${this.props.volume * 100}%`}
+								handleSlide={this.props.handleVolumeSlide} />
 					</div>
 				</div>
 				<div style={{float: 'left', width: '100%'}}>
-					<Slider width="50%" />
+					<Slider width={this.calcPercent(this.props.currentTime, this.props.duration)}
+							handleSlide={this.props.handleProgressSlide} />
 				</div>
 				<div style={{float: 'left', width: '100%'}}>
 					<div style={{
@@ -95,7 +108,7 @@ class ControlPanel extends React.Component {
 						fontSize: '12px',
 						color: '#ccc',
 						marginTop: '8px'
-					}}>0:00</div>
+					}}>{this.formatTime(this.props.currentTime)}</div>
 					<button key="repeat" style={[this.buttonStyle, {backgroundImage: 'url(img/repeat.png)', float: 'right'}]}></button>
 				</div>
 			</div>

@@ -12,8 +12,13 @@ class Player extends React.Component {
 	}
 
 	state = {
+		songs: new Zipper(this.props.songs, true),
 		currentPlaying: this.props.songs[0],
-		songs: new Zipper(this.props.songs)
+		isPlaying: true,
+		isMuted: false,
+		currentTime: 0,
+		duration: 1,
+		volume: 0.7
 	}
 
 	nextSong(){
@@ -25,7 +30,41 @@ class Player extends React.Component {
 	}
 
 	pause(){
-		
+		if(this.refs.audioPlayer.paused){
+			this.refs.audioPlayer.play()
+			this.setState({isPlaying: true})
+		} else {
+			this.refs.audioPlayer.pause()
+			this.setState({isPlaying: false})
+		}
+	}
+
+	handleTimeUpdate(){
+		var currentTime = this.refs.audioPlayer.currentTime
+		var duration = this.refs.audioPlayer.duration
+		this.setState({currentTime, duration})
+	}
+
+	handleProgressSlide(percent){
+		this.refs.audioPlayer.currentTime = (percent / 100) * this.refs.audioPlayer.duration
+		this.handleTimeUpdate()
+	}
+
+	handleVolumeSlide(percent){
+		var volume = percent / 100
+		this.refs.audioPlayer.volume = volume
+		this.setState({volume})
+	}
+
+	componentDidMount(){
+		this.refs.audioPlayer.addEventListener('ended', this.nextSong.bind(this))
+		this.refs.audioPlayer.addEventListener('timeupdate', this.handleTimeUpdate.bind(this))
+	}
+
+	handleMute(){
+		var muted = !this.refs.audioPlayer.muted
+		this.refs.audioPlayer.muted = muted
+		this.setState({isMuted: muted})
 	}
 
 	render(){
@@ -34,8 +73,17 @@ class Player extends React.Component {
 				functions={{
 					nextSong: this.nextSong.bind(this),
 					prevSong: this.prevSong.bind(this),
-					pause: this.pause.bind(this)
-				}} />
+					pause: this.pause.bind(this),
+					mute: this.handleMute.bind(this)
+				}}
+				isPlaying={this.state.isPlaying}
+				currentTime={this.state.currentTime}
+				duration={this.state.duration}
+				handleProgressSlide={this.handleProgressSlide.bind(this)}
+				handleVolumeSlide={this.handleVolumeSlide.bind(this)}
+				volume={this.state.volume}
+				isMuted={this.state.isMuted} />
+			<audio ref="audioPlayer" src={this.state.currentPlaying.url} autoPlay volume="0.7"></audio>
 			<SongList songs={this.state.songs} 
 				currentPlaying={this.state.currentPlaying} />
 		</div>;

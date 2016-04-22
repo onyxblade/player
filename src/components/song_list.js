@@ -23,7 +23,6 @@ class SongList extends React.Component {
 		</li>;
 	}
 	render() {
-		debugger
 		return <div style={{
 			background: 'rgba(0,0,0,0.5)',
 			width: '470px',
