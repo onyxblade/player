@@ -50,7 +50,7 @@ class SongList extends React.Component {
 			overflowX: 'hidden'
 		}}>
 			<ul style={{
-				height: '130px',
+				height: '180px',
 				width: '520px',
 				overflowY: 'auto',
 				listStyle: 'none',

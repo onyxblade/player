@@ -2,7 +2,19 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import Player from './components/player'
 
-ReactDOM.render(<Player songs={[
+
+function calcMargin(height){
+	if(height > 950){
+		return height * 0.5311542390194075
+	} else if(height > 860){
+		return height * 0.4902962206332993
+	} else {
+		return height * 0.34
+	}
+}
+
+ReactDOM.render(<Player style={{ marginTop: calcMargin(document.body.clientHeight) }} 
+	songs={[
 	{
 		cover: "http://p3.music.126.net/b5P2i1-Zzg2bCJpEMQwkoQ==/2412328511400856.jpg?param=130y130",
 		title: "ミラクル・ガール",
@@ -18,3 +30,7 @@ ReactDOM.render(<Player songs={[
 		album: "Use Your Illusion II"
 	},
 ]}/>, document.querySelector('#player'))
+
+window.onresize = function(){
+	ReactDOM.render(<Player style={{ marginTop: calcMargin(document.body.clientHeight)}}/>, document.querySelector('#player'))
+}

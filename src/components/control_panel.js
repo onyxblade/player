@@ -49,7 +49,7 @@ class ControlPanel extends React.Component {
 			width: '500px',
 			height: '130px',
 			padding: '25px',
-			margin: '0 auto 30px',
+			margin: '0 auto 0px',
 			position: 'relative',
 			textShadow: '0 1px 2px #000'
 		}} className="control-panel">

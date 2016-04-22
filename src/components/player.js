@@ -84,7 +84,7 @@ class Player extends React.Component {
 	}
 
 	render(){
-		return <div style={this.style}>
+		return <div style={[this.style, this.props.style]}>
 			<ControlPanel currentSong={this.state.currentSong}
 				functions={{
 					handleNextSong: this.handleNextSong.bind(this),
