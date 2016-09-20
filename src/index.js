@@ -1,7 +1,8 @@
+import './index.html'
+
 import React from 'react'
 import ReactDOM from 'react-dom'
 import Player from './components/player'
-
 
 function calcMargin(height){
 	if(height > 950){

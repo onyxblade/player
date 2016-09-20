@@ -1,15 +1,10 @@
-import Radium from 'radium'
 import React from 'react'
 import ControlPanel from './control_panel'
 import SongList from './song_list'
 import Audio from './audio'
+import styles from '../style/player.css'
 
-@Radium
 class Player extends React.Component {
-	style = {
-		font: '14px "Helvetica Neue",Helvetica,Arial,"Lucida Grande",sans-serif',
-		color: '#fff'
-	}
 
 	state = {
 		songs: this.props.songs,
@@ -84,7 +79,7 @@ class Player extends React.Component {
 	}
 
 	render(){
-		return <div style={[this.style, this.props.style]}>
+		return <div className={styles.player} style={this.props.style}>
 			<ControlPanel currentSong={this.state.currentSong}
 				functions={{
 					handleNextSong: this.handleNextSong.bind(this),
@@ -109,7 +104,7 @@ class Player extends React.Component {
 				setTimeSign={this.state.setTimeSign}
 				handleTimeUpdate={this.handleTimeUpdate.bind(this)}
 				handleEnded={this.handleEnded.bind(this)} />
-			<SongList songs={this.state.songs} 
+			<SongList songs={this.state.songs}
 				currentSong={this.state.currentSong}
 				handleSelectSong={this.handleSelectSong.bind(this)} />
 		</div>;

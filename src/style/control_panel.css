@@ -1,0 +1,82 @@
+.button {
+	opacity: 0.5;
+	transition: 0.3s;
+	cursor: pointer;
+	background-repeat: no-repeat;
+	background-position: center;
+	width: 24px;
+	height: 24px;
+	background-color: rgba(0, 0, 0, 0);
+	border: none;
+	margin-right: 3px;
+	outline: none;
+}
+
+.button:hover {
+	opacity: 1;
+}
+
+.repeatBtn {
+	background-image: url(../img/repeat.png);
+	float: right;
+	position: relative;
+}
+
+.line {
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+.songTitle {
+	font-size: 14px;
+	margin: 0;
+}
+
+.songInfo {
+	position: absolute;
+	margin-left: 155px;
+	width: 345px;
+}
+
+.cover {
+	border-radius: 10px;
+	width: 130px;
+	height: 130px;
+	border: 1px solid #333;
+	position: absolute;
+	box-shadow: 0 2px 10px blac;
+}
+
+.panel {
+	width: 500px;
+	height: 130px;
+	padding: 25px;
+	margin: 0 auto 0px;
+	position: relative;
+	text-shadow: 0 1px 2px #000;
+}
+
+.rewind {
+	background-image: url(../img/rewind.png);
+}
+
+.play {
+	background-image: url(../img/play.png);
+}
+
+.pause {
+	background-image: url(../img/pause.png);
+}
+
+.fastforward {
+	background-image: url(../img/fastforward.png);
+}
+
+.volume {
+	background-image: url(../img/volume.png);
+}
+
+.mute {
+	background-image: url(../img/mute.png);
+}
