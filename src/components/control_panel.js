@@ -58,7 +58,7 @@ class ControlPanel extends React.Component {
 				<div style={{float: 'right'}}>
 					<button key="mute" className={classNames(styles.button, (this.props.isMuted ? styles.mute : styles.volume ))}
 						style={{float: 'left'}}
-						onClick={this.props.functions.handleMute}></button>
+						onClick={this.props.functions.mute}></button>
 					<div style={{float: 'left', width: '100px'}}>
 						<Slider width={`${this.props.volume * 100}%`}
 								handleSlide={this.props.functions.handleVolumeSlide} />

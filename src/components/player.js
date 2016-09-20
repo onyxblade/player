@@ -21,14 +21,14 @@ class Player extends React.Component {
 	loopModes = ['list', 'single', 'none']
 
 	handleNextSong(){
-		var currentIndex = this.state.songs.findIndex(e => e == this.state.currentSong)
-		var currentSong = this.state.songs[currentIndex + 1 >= this.state.songs.length ? 0 : currentIndex + 1]
+		var currentIndex = this.props.songs.findIndex(e => e == this.state.currentSong)
+		var currentSong = this.props.songs[currentIndex + 1 >= this.props.songs.length ? 0 : currentIndex + 1]
 		this.setState({currentSong})
 	}
 
 	handlePrevSong(){
-		var currentIndex = this.state.songs.findIndex(e => e == this.state.currentSong)
-		var currentSong = this.state.songs[currentIndex - 1 < 0 ? this.state.songs.length - 1 : currentIndex - 1]
+		var currentIndex = this.props.songs.findIndex(e => e == this.state.currentSong)
+		var currentSong = this.props.songs[currentIndex - 1 < 0 ? this.props.songs.length - 1 : currentIndex - 1]
 		this.setState({currentSong})
 	}
 
@@ -60,7 +60,7 @@ class Player extends React.Component {
 
 	handleEnded(){
 		if(this.state.loopMode != 'single'){
-			if(this.state.loopMode == 'none' && this.state.currentSong == this.state.songs[this.state.songs.length - 1]){
+			if(this.state.loopMode == 'none' && this.state.currentSong == this.props.songs[this.props.songs.length - 1]){
 				this.setState({isPaused: true})
 			} else {
 				this.handleNextSong()
