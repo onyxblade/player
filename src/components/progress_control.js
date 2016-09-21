@@ -40,7 +40,7 @@ class ProgressControl extends React.Component{
 					<Slider width={this.calcPercent(this.context.currentTime, this.context.duration)}
 							handleSlide={this.context.handleProgressSlide} />
 				</div>
-				<div className={styles.progressSlider}>
+				<div className={styles.timeAndLoop}>
 					<div className={styles.currentTime}>{this.formatTime(this.context.currentTime)}</div>
 					<button key="repeat"
 							className={cn(styles.button, styles.repeatBtn)}

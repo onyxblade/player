@@ -1,19 +1,19 @@
 .elapsed {
 	position: absolute;
 	opacity: 0.7;
-	border-radius: 5px;
+	border-radius: 0.05rem;
 	background: #258fb8;
-	height: 5px;
+	height: 0.05rem;
 }
 
 .indicator {
 	background: #fff;
 	position: absolute;
-	width: 5px;
-	height: 5px;
+	width: 0.05rem;
+	height: 0.05rem;
 	border-radius: 50%;
 	transition: opacity 0.3s;
-	margin-left: -2px;
+	margin-left: -0.02rem;
 	opacity: 0;
 }
 
@@ -21,10 +21,9 @@
 	float: left;
 	background: rgba(0,0,0,0.3);
 	width: 100%;
-	margin-top: 11px;
-	height: 5px;
-	border-radius: 5px;
-	box-shadow: 0 1px 2px rgba(0,0,0,0.5) inset;
+	height: 0.05rem;
+	border-radius: 0.05rem;
+	box-shadow: 0 0.01rem 0.02rem rgba(0,0,0,0.5) inset;
 	cursor: pointer;
 	position: relative;
 }

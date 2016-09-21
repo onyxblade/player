@@ -16,8 +16,10 @@ class ControlPanel extends React.Component {
 				<img src={this.context.currentSong.cover} className={styles.cover} />
 				<SongInfo />
 				<div className={styles.control}>
-					<PlayingControl />
-					<VolumeControl />
+					<div style={{overflow: 'hidden'}}>
+						<PlayingControl />
+						<VolumeControl />
+					</div>
 					<ProgressControl />
 				</div>
 			</div>

@@ -31,9 +31,9 @@ xhr('GET', 'http://xiami.carp.mopaasapp.com/collection/226294947').then(function
 })
 
 function init(list){
-	ReactDOM.render(<Player style={{ marginTop: calcMargin(document.body.clientHeight) }} songs={list}/>, document.querySelector('#player'))
-
-	window.onresize = function(){
-		ReactDOM.render(<Player style={{ marginTop: calcMargin(document.body.clientHeight)}} songs={list}/>, document.querySelector('#player'))
-	}
+	//ReactDOM.render(<Player style={{ marginTop: calcMargin(document.body.clientHeight) }} songs={list}/>, document.querySelector('#player'))
+	ReactDOM.render(<Player songs={list}/>, document.querySelector('#player'))
+	//window.onresize = function(){
+	//	ReactDOM.render(<Player style={{ marginTop: calcMargin(document.body.clientHeight)}} songs={list}/>, document.querySelector('#player'))
+	//}
 }

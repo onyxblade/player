@@ -6,23 +6,23 @@
 
 .songInfo {
 	position: absolute;
-	margin-left: 155px;
-	width: 345px;
+	margin-left: 1.55rem;
+	width: 3.45rem;
 }
 
 .songTitle {
-	font-size: 14px;
+	font-size: 0.14rem;
 	margin: 0;
 }
 
 .songArtist {
-	font-size: 12px;
+	font-size: 0.12rem;
 	color: #ccc;
-	margin: 5px 0 0 0;
+	margin: 0.03rem 0 0 0;
 }
 
 .songAlbum {
-	font-size: 12px;
+	font-size: 0.12rem;
 	color: #ccc;
-	margin: 5px 0 0 0;
+	margin: 0.03rem 0 0 0;
 }

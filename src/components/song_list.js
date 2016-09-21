@@ -18,12 +18,14 @@ class SongList extends React.Component {
 			[styles.listItem]: true,
 			[styles.playing]: this.isItemPlaying(item)
 		})
-		return (<li className={className}
-			key={item.title}
-			onClick={this.selectSongHandler(item).bind(this)}
-		>
+		return (
+			<li className={className}
+					key={item.title}
+					onClick={this.selectSongHandler(item).bind(this)}>
+				<span className={styles.icon}></span>
 				{item.artist} - {item.title}
-		</li>);
+			</li>
+		);
 	}
 	render() {
 		return <div className={styles.list}>

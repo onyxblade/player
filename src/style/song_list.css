@@ -1,9 +1,9 @@
 .listItem {
 	text-overflow: ellipsis;
 	transition: 0.3s;
-	font-size: 12px;
+	font-size: 0.12rem;
 	line-height: 2;
-	padding-left: 25px;
+	padding-left: 0.05rem;
 	cursor: pointer;
 	color: #aaa;
 	white-space: nowrap;
@@ -14,8 +14,8 @@
 }
 
 .ul {
-	height: 180px;
-	width: 520px;
+	height: 1.8rem;
+	width: 5.2rem;
 	overflow-y: auto;
 	list-style: none;
 	margin: 0;
@@ -24,23 +24,37 @@
 
 .list {
 	background: rgba(0,0,0,0.5);
-	width: 470px;
-	margin: 0 auto 30px;
-	padding: 10px 15px;
+	width: 4.7rem;
+	margin: 0 auto 0.3rem;
+	padding: 0.10rem 0.15rem;
 	position: relative;
-	border-radius: 5px;
-	box-shadow: 0 2px 6px rgba(0,0,0,0.5);
+	border-radius: 0.05rem;
+	box-shadow: 0 0.02rem 0.06rem rgba(0,0,0,0.5);
 	overflow-x: hidden;
 }
 
 .playing {
-	background: url(../img/playing.png) no-repeat 0 center;
 	font-weight: bold;
 	color: #fff;
 }
 
+.playing .icon{
+	opacity: 1;
+}
+
+.icon {
+	background: url(../img/playing.png);
+	background-size: 0.12rem 0.12rem;
+	width: 0.12rem;
+	height: 0.12rem;
+	display: inline-block;
+	vertical-align: text-top;
+	margin-right: 0.07rem;
+	opacity: 0;
+}
+
 .songInfo {
 	position: absolute;
-	marginLeft: 155px;
-	width: 345px;
+	marginLeft: 1.55rem;
+	width: 3.45rem;
 }

@@ -1,6 +1,7 @@
 <html>
 	<head>
 		<meta charset="utf-8" />
+		<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
 		<style>
 			body {
 				margin: 0;
@@ -8,9 +9,14 @@
 				background-size: cover;
 				background-position: center;
 				width: 100%;
-				position: fixed;
 			}
-			body > p {
+
+			#player {
+				position: absolute;
+				left: 0;
+				right: 0;
+			}
+			div.footer {
 				font-family: "Helvetica Neue",Helvetica,Arial,"Lucida Grande",sans-serif;
 				font-size:12px;
 				color:#ccc;
@@ -19,22 +25,41 @@
 				width: 100%;
 				bottom: 15px;
 				position: fixed;
+				line-height: 3px;
 			}
-			body > p a {
+			div.footer a {
 				color:#fff;
 				font-weight:bold;
+				text-decoration: none;
 			}
-			body > p a:hover {
-				text-decoration: underline;;
+			div.footer a:hover {
+				text-decoration: underline;
+			}
+
+			@media (max-width: 1000px) {
+				html {
+					font-size: calc(65vw/3.75);
+				}
+				#player {
+					bottom: 10%;
+				}
+			}
+
+			@media (min-width: 1000px) {
+				html {
+					font-size: 100px;
+				}
+				#player {
+					bottom: 5%;
+				}
 			}
 		</style>
 	</head>
 	<body>
 		<div id="player"></div>
-		<p>
-			Background from <a href="http://www.pixiv.net/member_illust.php?mode=medium&amp;illust_id=45949248" target="_blank">Pixiv#45949248</a><br>
-			Songs from <a href="http://www.xiami.com" target="_blank">Xiami</a>
-		</p>
+		<div class="footer">
+			Background from <a href="http://www.pixiv.net/member_illust.php?mode=medium&amp;illust_id=45949248" target="_blank">Pixiv#45949248</a> and Songs from <a href="http://www.xiami.com" target="_blank">Xiami</a>
+		</div>
 		<script src="bundle.js"></script>
 	</body>
 </html>
