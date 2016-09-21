@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {PropTypes} from 'react'
 import ControlPanel from './control_panel'
 import SongList from './song_list'
 import Audio from './audio'
@@ -7,7 +7,6 @@ import styles from '../style/player.css'
 class Player extends React.Component {
 
 	state = {
-		songs: this.props.songs,
 		currentSong: this.props.songs[0],
 		isPaused: false,
 		isMuted: false,
@@ -16,6 +15,42 @@ class Player extends React.Component {
 		volume: 0.7,
 		loopMode: 'none',
 		setTime: 0
+	}
+
+	static childContextTypes = {
+		isMuted: PropTypes.bool,
+		isPaused: PropTypes.bool,
+		handleMute: PropTypes.func,
+		handlePause: PropTypes.func,
+		handleNextSong: PropTypes.func,
+		handlePrevSong:  PropTypes.func,
+		handleProgressSlide: PropTypes.func,
+		handleVolumeSlide: PropTypes.func,
+		handleLoopModeChange: PropTypes.func,
+		currentTime: PropTypes.number,
+		duration: PropTypes.number,
+		volume: PropTypes.number,
+		loopMode: PropTypes.string,
+		currentSong: PropTypes.object
+	}
+
+	getChildContext(){
+		return {
+			isMuted: this.state.isMuted,
+			isPaused: this.state.isPaused,
+			handleNextSong: this.handleNextSong.bind(this),
+			handlePrevSong: this.handlePrevSong.bind(this),
+			handlePause: this.handlePause.bind(this),
+			handleMute: this.handleMute.bind(this),
+			handleLoopModeChange: this.handleLoopModeChange.bind(this),
+			handleProgressSlide: this.handleProgressSlide.bind(this),
+			handleVolumeSlide: this.handleVolumeSlide.bind(this),
+			currentTime: this.state.currentTime,
+			duration: this.state.duration,
+			volume: this.state.volume,
+			loopMode: this.state.loopMode,
+			currentSong: this.state.currentSong
+		}
 	}
 
 	loopModes = ['list', 'single', 'none']
@@ -80,33 +115,18 @@ class Player extends React.Component {
 
 	render(){
 		return <div className={styles.player} style={this.props.style}>
-			<ControlPanel currentSong={this.state.currentSong}
-				functions={{
-					handleNextSong: this.handleNextSong.bind(this),
-					handlePrevSong: this.handlePrevSong.bind(this),
-					handlePause: this.handlePause.bind(this),
-					handleMute: this.handleMute.bind(this),
-					handleLoopModeChange: this.handleLoopModeChange.bind(this),
-					handleProgressSlide: this.handleProgressSlide.bind(this),
-					handleVolumeSlide: this.handleVolumeSlide.bind(this)
-				}}
-				isPaused={this.state.isPaused}
-				currentTime={this.state.currentTime}
-				duration={this.state.duration}
-				volume={this.state.volume}
-				isMuted={this.state.isMuted}
-				loopMode={this.state.loopMode} />
+			<ControlPanel />
 			<Audio src={this.state.currentSong.url}
 				muted={this.state.isMuted}
 				volume={this.state.volume}
 				paused={this.state.isPaused}
 				setTime={this.state.setTime}
 				setTimeSign={this.state.setTimeSign}
-				handleTimeUpdate={this.handleTimeUpdate.bind(this)}
-				handleEnded={this.handleEnded.bind(this)} />
-			<SongList songs={this.state.songs}
+				handleTimeUpdate={::this.handleTimeUpdate}
+				handleEnded={::this.handleEnded} />
+			<SongList songs={this.props.songs}
 				currentSong={this.state.currentSong}
-				handleSelectSong={this.handleSelectSong.bind(this)} />
+				handleSelectSong={::this.handleSelectSong} />
 		</div>;
 	}
 }

@@ -16,35 +16,6 @@
 	box-shadow: 0 2px 10px black;
 }
 
-.line {
-	text-overflow: ellipsis;
-	white-space: nowrap;
-	overflow: hidden;
-}
-
-.songInfo {
-	position: absolute;
-	margin-left: 155px;
-	width: 345px;
-}
-
-.songTitle {
-	font-size: 14px;
-	margin: 0;
-}
-
-.songArtist {
-	font-size: 12px;
-	color: #ccc;
-	margin: 5px 0 0 0;
-}
-
-.songAlbum {
-	font-size: 12px;
-	color: #ccc;
-	margin: 5px 0 0 0;
-}
-
 .button {
 	opacity: 0.5;
 	transition: 0.3s;
