@@ -8,7 +8,7 @@ class ProgressControl extends React.Component{
 		currentTime: PropTypes.number,
 		duration: PropTypes.number,
 		handleProgressSlide: PropTypes.func,
-		handleLoopModeChangee: PropTypes.func,
+		handleLoopModeChange: PropTypes.func,
 		loopMode: PropTypes.string
 	}
 
