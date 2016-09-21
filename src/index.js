@@ -14,13 +14,21 @@ function calcMargin(height){
 	}
 }
 
-var xhr = new XMLHttpRequest()
-xhr.onload = function(e){
-	var list = JSON.parse(e.target.responseText).map(({album, artist, cover, name, url}) => ({album, artist, title: name, cover, url}))
-	init(list)
+function xhr(method, url){
+	return new Promise(function(resolve, reject){
+		var xhr = new XMLHttpRequest()
+		xhr.onload = function(e){
+			resolve(e.target)
+		}
+		xhr.open(method, url)
+		xhr.send()
+	})
 }
-xhr.open('GET', 'http://xiami.carp.mopaasapp.com/collection/226294947')
-xhr.send()
+
+xhr('GET', 'http://xiami.carp.mopaasapp.com/collection/226294947').then(function(res){
+	var list = JSON.parse(res.responseText).map(({album, artist, cover, name, url}) => ({album, artist, title: name, cover, url}))
+	init(list)
+})
 
 function init(list){
 	ReactDOM.render(<Player style={{ marginTop: calcMargin(document.body.clientHeight) }} songs={list}/>, document.querySelector('#player'))

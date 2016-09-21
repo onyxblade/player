@@ -13,7 +13,7 @@ module.exports = {
 		loaders: [
 			{ test: /\.js|jsx$/, loader: "babel" },
 			{ test: /\.css$/, loader: "style!css?modules"},
-			{ test: /\.png$/, loader: "file"},
+			{ test: /\.png$/, loader: "url"},
 			{ test: /\.html$/, loader: "file?name=[name].[ext]"}
 		]
 	},

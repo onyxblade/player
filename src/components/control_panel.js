@@ -1,9 +1,20 @@
-import React from 'react'
+import React, { PropTypes } from 'react'
 import Slider from './slider'
 import styles from '../style/control_panel.css'
-import classNames from 'classnames'
+import cn from 'classnames'
 
 class ControlPanel extends React.Component {
+	static propTypes = {
+		loopMode: PropTypes.string,
+		currentSong: PropTypes.object.isRequired,
+		functions: PropTypes.object.isRequired,
+		isPaused: PropTypes.bool,
+		isMuted: PropTypes.bool,
+		duration: PropTypes.number,
+		volume: PropTypes.number,
+		currentTime: PropTypes.number
+	}
+
 	formatTime(time){
 		var min = Math.floor(time / 60).toString()
 		var sec = Math.floor(time % 60).toString()
@@ -26,64 +37,43 @@ class ControlPanel extends React.Component {
 		return <div className={styles.panel}>
 			<img src={this.props.currentSong.cover} className={styles.cover} />
 			<div className={styles.songInfo}>
-				<h3 className={styles.line} style={{
-					fontSize: '14px',
-					margin: '0px'
-				}}>{this.props.currentSong.title}</h3>
-				<p className={styles.line} style={{
-					fontSize: '12px',
-					color: '#ccc',
-					margin: '5px 0 0 0'
-				}}>{this.props.currentSong.artist}</p>
-				<p className={styles.line} style={{
-					fontSize: '12px',
-					color: '#ccc',
-					margin:'5px 0 0 0'
-				}}>{this.props.currentSong.album}</p>
+				<h3 className={cn(styles.line, styles.songTitle)}>{this.props.currentSong.title}</h3>
+				<p className={cn(styles.line, styles.songArtist)}>{this.props.currentSong.artist}</p>
+				<p className={cn(styles.line, styles.songAlbum)}>{this.props.currentSong.album}</p>
 			</div>
-			<div style={{
-				position: 'absolute',
-				marginLeft: '155px',
-				width: '345px',
-				bottom: '20px'
-			}} className="control">
+			<div className={styles.control}>
 				<div style={{float: 'left'}}>
-					<button key="rewind" className={classNames(styles.button, styles.rewind)}
-						onClick={this.props.functions.handlePrevSong} ></button>
-					<button key="pause" className={classNames(styles.button, (this.props.isPaused ? styles.play : styles.pause ))}
-						onClick={this.props.functions.handlePause} ></button>
-					<button key="fastforward" className={classNames(styles.button, styles.fastforward)}
-						onClick={this.props.functions.handleNextSong} ></button>
+					<button key="rewind"
+						className={cn(styles.button, styles.rewind)}
+						onClick={this.props.functions.handlePrevSong}></button>
+					<button key="pause"
+						className={cn(styles.button, (this.props.isPaused ? styles.play : styles.pause ))}
+						onClick={this.props.functions.handlePause}></button>
+					<button key="fastforward"
+						className={cn(styles.button, styles.fastforward)}
+						onClick={this.props.functions.handleNextSong}></button>
 				</div>
 				<div style={{float: 'right'}}>
-					<button key="mute" className={classNames(styles.button, (this.props.isMuted ? styles.mute : styles.volume ))}
-						style={{float: 'left'}}
+					<button key="mute"
+						className={cn(styles.button, (this.props.isMuted ? styles.mute : styles.volume ))}
 						onClick={this.props.functions.handleMute}></button>
-					<div style={{float: 'left', width: '100px'}}>
+					<div className={styles.volumeSlider}>
 						<Slider width={`${this.props.volume * 100}%`}
 								handleSlide={this.props.functions.handleVolumeSlide} />
 					</div>
 				</div>
-				<div style={{float: 'left', width: '100%'}}>
+				<div className={styles.progressSlider}>
 					<Slider width={this.calcPercent(this.props.currentTime, this.props.duration)}
 							handleSlide={this.props.functions.handleProgressSlide} />
 				</div>
-				<div style={{float: 'left', width: '100%'}}>
-					<div style={{
-						float: 'left',
-						fontSize: '12px',
-						color: '#ccc',
-						marginTop: '8px'
-					}}>{this.formatTime(this.props.currentTime)}</div>
-					<button key="repeat" className={`${styles.button} ${styles.repeatBtn}`} style={this.getLoopIconStyle()} onClick={this.props.functions.handleLoopModeChange}>
-						<span style={{
-							position: 'absolute',
-							top: '3px',
-							right: '-2px',
-							fontSize: '8px',
-							display: (this.props.loopMode == 'single' ? 'block' : 'none'),
-							color: '#fff'
-						}}>1</span>
+				<div className={styles.progressSlider}>
+					<div className={styles.currentTime}>{this.formatTime(this.props.currentTime)}</div>
+					<button key="repeat"
+							className={cn(styles.button, styles.repeatBtn)}
+							style={this.getLoopIconStyle()}
+							onClick={this.props.functions.handleLoopModeChange}>
+						<span className={styles.loopSingleIndicator}
+							style={{display: (this.props.loopMode == 'single' ? 'block' : 'none')}}>1</span>
 					</button>
 				</div>
 			</div>

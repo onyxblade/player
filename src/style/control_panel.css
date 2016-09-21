@@ -1,3 +1,50 @@
+.panel {
+	width: 500px;
+	height: 130px;
+	padding: 25px;
+	margin: 0 auto 0px;
+	position: relative;
+	text-shadow: 0 1px 2px #000;
+}
+
+.cover {
+	border-radius: 10px;
+	width: 130px;
+	height: 130px;
+	border: 1px solid #333;
+	position: absolute;
+	box-shadow: 0 2px 10px black;
+}
+
+.line {
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+.songInfo {
+	position: absolute;
+	margin-left: 155px;
+	width: 345px;
+}
+
+.songTitle {
+	font-size: 14px;
+	margin: 0;
+}
+
+.songArtist {
+	font-size: 12px;
+	color: #ccc;
+	margin: 5px 0 0 0;
+}
+
+.songAlbum {
+	font-size: 12px;
+	color: #ccc;
+	margin: 5px 0 0 0;
+}
+
 .button {
 	opacity: 0.5;
 	transition: 0.3s;
@@ -16,45 +63,11 @@
 	opacity: 1;
 }
 
-.repeatBtn {
-	background-image: url(../img/repeat.png);
-	float: right;
-	position: relative;
-}
-
-.line {
-	text-overflow: ellipsis;
-	white-space: nowrap;
-	overflow: hidden;
-}
-
-.songTitle {
-	font-size: 14px;
-	margin: 0;
-}
-
-.songInfo {
+.control {
 	position: absolute;
 	margin-left: 155px;
 	width: 345px;
-}
-
-.cover {
-	border-radius: 10px;
-	width: 130px;
-	height: 130px;
-	border: 1px solid #333;
-	position: absolute;
-	box-shadow: 0 2px 10px blac;
-}
-
-.panel {
-	width: 500px;
-	height: 130px;
-	padding: 25px;
-	margin: 0 auto 0px;
-	position: relative;
-	text-shadow: 0 1px 2px #000;
+	bottom: 20px;
 }
 
 .rewind {
@@ -75,8 +88,41 @@
 
 .volume {
 	background-image: url(../img/volume.png);
+	float: left;
 }
 
 .mute {
 	background-image: url(../img/mute.png);
+	float: left;
+}
+
+.repeatBtn {
+	background-image: url(../img/repeat.png);
+	float: right;
+	position: relative;
+}
+
+.volumeSlider {
+	float: left;
+	width: 100px;
+}
+
+.progressSlider {
+	float: left;
+	width: 100%;
+}
+
+.currentTime {
+	float: left;
+	font-size: 12px;
+	color: #ccc;
+	margin-top: 8px;
+}
+
+.loopSingleIndicator {
+	position: absolute;
+	top: 3px;
+	right: -2px;
+	font-size: 8px;
+	color: #fff;
 }
