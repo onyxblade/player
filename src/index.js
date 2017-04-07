@@ -25,7 +25,7 @@ function xhr(method, url){
 	})
 }
 
-xhr('GET', 'http://xiami.carp.mopaasapp.com/collection/226294947').then(function(res){
+xhr('GET', 'http://xiami.butterfly.mopaasapp.com/collection/226294947').then(function(res){
 	var list = JSON.parse(res.responseText).map(({album, artist, cover, name, url}) => ({album, artist, title: name, cover, url}))
 	init(list)
 })
